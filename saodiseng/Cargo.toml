@@ -1,0 +1,33 @@
+[package]
+name = "saodiseng"
+version = "0.1.0"
+authors = ["lurui"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "saodiseng"
+path = "src/bin/server/server.rs"
+
+
+[dependencies]
+# 日志
+log = "0.4.0"
+env_logger = "0.6.0"
+
+# 时间
+chrono = "0.4.19"
+
+# 异步库
+tokio = { version = "1.2.0", features = ["full"] }
+tokio-stream = { version =  "0.1", features = ["net"] }
+async-stream = "0.3"
+futures = { version = "0.3", default-features = false, features = ["alloc"] }
+
+# grpc
+prost = "0.7"
+tonic = "0.4.1"
+
+# grpc构建依赖
+[build-dependencies]
+tonic-build = "0.4.1"
