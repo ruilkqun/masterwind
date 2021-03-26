@@ -26,7 +26,8 @@ futures = { version = "0.3", default-features = false, features = ["alloc"] }
 
 # grpc
 prost = "0.7"
-tonic = "0.4.1"
+tonic = { path = "tonic" }
+#tonic = "0.4.1"
 
 # grpc构建依赖
 [build-dependencies]
