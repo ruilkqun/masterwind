@@ -16,6 +16,7 @@ use std::io::Write;
 // use std::path::Path;
 pub mod v1alpha2;
 pub mod v1;
+pub mod pull_image;
 
 use futures::TryFutureExt;
 #[cfg(unix)]
