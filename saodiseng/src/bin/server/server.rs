@@ -7,9 +7,11 @@
 
 // #![cfg_attr(not(unix), allow(unused_imports))]
 
-#[macro_use]
+
+// #[macro_use]
 extern crate log;
 extern crate env_logger;
+
 use env_logger::Env;
 use chrono::Local;
 use std::io::Write;
@@ -18,7 +20,6 @@ pub mod v1alpha2;
 pub mod v1;
 pub mod pull_image;
 
-use futures::TryFutureExt;
 #[cfg(unix)]
 use tokio::net::UnixListener;
 use tonic::{transport::Server, Request, Response, Status};
