@@ -10,29 +10,30 @@ use futures::future::ok;
 use tokio_core::reactor::Core;
 
 
-// pub async fn pull_image(request:Request<PullImageRequest>) -> impl Future<Item=PullImageResponse,Error=Box<dyn Error + 'static>> {
-//         //
-//         // println!("Got a request: {:?}", request);
-//         // let reply = PullImageResponse {
-//         //     image_ref:"pull image_ref".to_string(),
-//         // };
-//         let mut reactor = Core::new().unwrap();
-//         let reply_future = pull_image_impl(request).await;
-//
-//         let reply = reactor.run(reply_future).unwrap();
-//         return ok(reply);
-// }
-
-
-pub fn pull_image(request:Request<PullImageRequest>) -> PullImageResponse {
+pub async fn pull_image(request:Request<PullImageRequest>) -> PullImageResponse {
         //
-        println!("Got a request: {:?}", request);
-        let reply = PullImageResponse {
-            image_ref:"pull image_ref".to_string(),
-        };
+        // println!("Got a request: {:?}", request);
+        // let reply = PullImageResponse {
+        //     image_ref:"pull image_ref".to_string(),
+        // };
         // let mut reactor = Core::new().unwrap();
-        // let reply = pull_image_impl(request).await;
+        let reply_future = pull_image_impl(request).await;
 
         // let reply = reactor.run(reply_future).unwrap();
+        let reply = reply_future;
         return reply;
 }
+
+
+// pub fn pull_image(request:Request<PullImageRequest>) -> PullImageResponse {
+//         //
+//         println!("Got a request: {:?}", request);
+//         let reply = PullImageResponse {
+//             image_ref:"pull image_ref".to_string(),
+//         };
+//         // let mut reactor = Core::new().unwrap();
+//         // let reply = pull_image_impl(request).await;
+//
+//         // let reply = reactor.run(reply_future).unwrap();
+//         return reply;
+// }

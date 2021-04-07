@@ -37,7 +37,7 @@ sled = "0.34.6"
 
 
 # OCI镜像下载
-ant_king_image = "0.3.5"
+ant_king_image = "0.3.10"
 
 # grpc构建依赖
 [build-dependencies]

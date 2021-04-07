@@ -41,6 +41,7 @@ pub async fn pull_image_impl(request:Request<PullImageRequest>) -> PullImageResp
 
                 let image_digest_future = cri_pull_image("".to_string(), "".to_string(), "".to_string(), image_name.parse().unwrap(), image_version.parse().unwrap(), true).await;
                 let image_digest = reactor.run(image_digest_future).unwrap();
+                // let image_digest = image_digest_future.unwrap();
 
                 let reply = PullImageResponse {
                         image_ref: image_digest
@@ -73,6 +74,7 @@ pub async fn pull_image_impl(request:Request<PullImageRequest>) -> PullImageResp
 
                 let image_digest_future = cri_pull_image(tmp3, username, password, image_name.parse().unwrap(), image_version.parse().unwrap(), true).await;
                 let image_digest = reactor.run(image_digest_future).unwrap();
+                // let image_digest = image_digest_future.unwrap();
 
                 let reply = PullImageResponse {
                         image_ref: image_digest
