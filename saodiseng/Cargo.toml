@@ -23,7 +23,7 @@ tokio = { version = "1.2.0", features = ["full"] }
 tokio-stream = { version =  "0.1", features = ["net"] }
 async-stream = "0.3"
 futures = { version = "0.3", default-features = false, features = ["alloc"] }
-
+tokio-core = "0.1.18"
 # grpc
 prost = "0.7"
 tonic = { path = "tonic" }
@@ -33,7 +33,7 @@ tonic = { path = "tonic" }
 sled = "0.34.6"
 
 # oci镜像库
-ant_king_image = "0.3.5"
+ant_king_image = "0.3.10"
 
 # grpc构建依赖
 [build-dependencies]

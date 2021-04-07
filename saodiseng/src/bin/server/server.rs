@@ -7,7 +7,7 @@
 
 // #![cfg_attr(not(unix), allow(unused_imports))]
 
-#[macro_use]
+// #[macro_use]
 extern crate log;
 extern crate env_logger;
 use env_logger::Env;
@@ -257,7 +257,7 @@ impl ImageServiceV1alpha2 for MyK8sImageV1alpha2 {
     }
 
     async fn pull_image(&self,request:Request<PullImageRequestV1alpha2>) -> Result<Response<PullImageResponseV1alpha2>, Status> {
-        Ok(Response::new(pull_image_v1alpha2(request)))
+        Ok(Response::new(pull_image_v1alpha2(request).await))
     }
 
     async fn remove_image(&self,request:Request<RemoveImageRequestV1alpha2>) -> Result<Response<RemoveImageResponseV1alpha2>, Status> {
