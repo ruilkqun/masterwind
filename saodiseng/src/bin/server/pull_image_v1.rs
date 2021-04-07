@@ -1,12 +1,12 @@
 use tonic::Request;
 
-use crate::v1alpha2::impl_struct::k8s_v1alpha2;
-use k8s_v1alpha2::{ PullImageRequest,PullImageResponse };
+use crate::v1::impl_struct::k8s_v1;
+use k8s_v1::{ PullImageRequest,PullImageResponse };
 
 use ant_king_image::cri_server_image_pull::cri_pull_image;
 use ant_king_image::local_repositories::get_image_digest_local;
 
-pub async fn pull_image_impl(request:Request<PullImageRequest>) -> PullImageResponse {
+pub async fn pull_image_impl_v1(request:Request<PullImageRequest>) -> PullImageResponse {
         // docker:nginx:latest
         // 192.168.1.118:8899/saodiseng/nginx:latest
         let pull_image_request = request.into_inner();
@@ -24,22 +24,24 @@ pub async fn pull_image_impl(request:Request<PullImageRequest>) -> PullImageResp
                 }
         };
 
-        let image_analysis1 = image_tmp2.image.split(";");
+        let image_analysis1 = image_tmp2.image.split(":");
         let image_analysis2:Vec<&str> = image_analysis1.collect();
         let docker = image_analysis2[0];
 
+        // println!("1");
+        // println!("docker:{}",docker);
         return if docker == "docker" {
                 let image_name = image_analysis2[1];
                 let image_version = image_analysis2[2];
 
                 cri_pull_image("".to_string(), "".to_string(), "".to_string(), image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap(), true).await;
                 let image_digest = get_image_digest_local(image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap()).await.unwrap();
+
                 let reply = PullImageResponse {
                         image_ref: image_digest
                 };
                 reply
         } else {
-
                 let image_auth = match auth {
                         Some(res) => res,
                         None => {

@@ -16,7 +16,8 @@ use std::io::Write;
 // use std::path::Path;
 pub mod v1alpha2;
 pub mod v1;
-pub mod pull_image;
+pub mod pull_image_v1alpha2;
+pub mod pull_image_v1;
 
 use futures::TryFutureExt;
 #[cfg(unix)]
@@ -374,7 +375,7 @@ impl ImageServiceV1 for MyK8sImageV1 {
     }
 
     async fn pull_image(&self,request:Request<PullImageRequestV1>) -> Result<Response<PullImageResponseV1>, Status> {
-        Ok(Response::new(pull_image_v1(request)))
+        Ok(Response::new(pull_image_v1(request).await))
     }
 
     async fn remove_image(&self,request:Request<RemoveImageRequestV1>) -> Result<Response<RemoveImageResponseV1>, Status> {
