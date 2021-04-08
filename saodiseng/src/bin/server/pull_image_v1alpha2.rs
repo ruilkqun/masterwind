@@ -38,7 +38,7 @@ pub async fn pull_image_impl_v1alpha2(request:Request<PullImageRequest>) -> Pull
                 cri_pull_image("".to_string(), "".to_string(), "".to_string(), image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap(), true).await;
                 let image_digest_1 = get_image_digest_local(image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap()).await.unwrap();
                 let image_digest = format!("{}@{}",image_name.clone(),image_digest_1.clone());
-                println!("image_digest:{}",image_digest);
+                println!("image_digest:{}",image_digest.clone());
                 let reply = PullImageResponse {
                         image_ref: image_digest.clone()
                 };
@@ -69,6 +69,7 @@ pub async fn pull_image_impl_v1alpha2(request:Request<PullImageRequest>) -> Pull
                 cri_pull_image(tmp3, username, password, image_name.parse().unwrap(), image_version.parse().unwrap(), true).await;
                 let image_digest_1 = get_image_digest_local(image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap()).await.unwrap();
                 let image_digest = format!("{}@{}",image_name.clone(),image_digest_1.clone());
+                println!("image_digest:{}",image_digest.clone());
 
                 let reply = PullImageResponse {
                         image_ref: image_digest.clone()
