@@ -13,7 +13,7 @@ pub async fn pull_image_impl_v1alpha2(request:Request<PullImageRequest>) -> Pull
         let pull_image_request = request.into_inner();
         let image_tmp1 = pull_image_request.clone().image;
         let auth = pull_image_request.clone().auth;
-        let sandbox_config = pull_image_request.clone().sandbox_config;
+        let _sandbox_config = pull_image_request.clone().sandbox_config;
 
         let image_tmp2 = match image_tmp1 {
                 Some(res) => res,
@@ -36,10 +36,11 @@ pub async fn pull_image_impl_v1alpha2(request:Request<PullImageRequest>) -> Pull
                 let image_version = image_analysis2[2];
 
                 cri_pull_image("".to_string(), "".to_string(), "".to_string(), image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap(), true).await;
-                let image_digest = get_image_digest_local(image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap()).await.unwrap();
-
+                let image_digest_1 = get_image_digest_local(image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap()).await.unwrap();
+                let image_digest = format!("{}@{}",image_name.clone(),image_digest_1.clone());
+                println!("image_digest:{}",image_digest);
                 let reply = PullImageResponse {
-                        image_ref: image_digest
+                        image_ref: image_digest.clone()
                 };
                 reply
         } else {
@@ -66,11 +67,11 @@ pub async fn pull_image_impl_v1alpha2(request:Request<PullImageRequest>) -> Pull
                 let image_name = format!("{}",tmp4);
 
                 cri_pull_image(tmp3, username, password, image_name.parse().unwrap(), image_version.parse().unwrap(), true).await;
-                let image_digest = get_image_digest_local(image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap()).await.unwrap();
-
+                let image_digest_1 = get_image_digest_local(image_name.clone().parse().unwrap(), image_version.clone().parse().unwrap()).await.unwrap();
+                let image_digest = format!("{}@{}",image_name.clone(),image_digest_1.clone());
 
                 let reply = PullImageResponse {
-                        image_ref: image_digest
+                        image_ref: image_digest.clone()
                 };
                 reply
         }
