@@ -9,7 +9,7 @@ use ant_king_image::local_repositories::get_image_digest_local;
 
 pub async fn pull_image_impl_v1alpha2(request:Request<PullImageRequest>) -> PullImageResponse {
         // docker:nginx:latest
-        // 192.168.1.118:8899/saodiseng/nginx:latest
+        // harbor:192.168.1.118:8899/saodiseng/nginx:latest
         let pull_image_request = request.into_inner();
         let image_tmp1 = pull_image_request.clone().image;
         let auth = pull_image_request.clone().auth;

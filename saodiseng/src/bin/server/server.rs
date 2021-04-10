@@ -16,8 +16,10 @@ use std::io::Write;
 // use std::path::Path;
 pub mod v1alpha2;
 pub mod v1;
-pub mod pull_image_v1alpha2;
-pub mod pull_image_v1;
+pub mod impl_pull_image_v1alpha2;
+pub mod impl_pull_image_v1;
+pub mod impl_list_images_v1alpha2;
+pub mod impl_list_images_v1;
 
 use futures::TryFutureExt;
 #[cfg(unix)]
@@ -250,7 +252,7 @@ impl RuntimeServiceV1alpha2 for MyK8sRuntimeV1alpha2 {
 #[tonic::async_trait]
 impl ImageServiceV1alpha2 for MyK8sImageV1alpha2 {
     async fn list_images(&self,request:Request<ListImagesRequestV1alpha2>) -> Result<Response<ListImagesResponseV1alpha2>, Status> {
-        Ok(Response::new(list_images_v1alpha2(request)))
+        Ok(Response::new(list_images_v1alpha2(request).await))
     }
 
     async fn image_status(&self,request:Request<ImageStatusRequestV1alpha2>) -> Result<Response<ImageStatusResponseV1alpha2>, Status> {
@@ -367,7 +369,7 @@ impl RuntimeServiceV1 for MyK8sRuntimeV1 {
 #[tonic::async_trait]
 impl ImageServiceV1 for MyK8sImageV1 {
     async fn list_images(&self,request:Request<ListImagesRequestV1>) -> Result<Response<ListImagesResponseV1>, Status> {
-        Ok(Response::new(list_images_v1(request)))
+        Ok(Response::new(list_images_v1(request).await))
     }
 
     async fn image_status(&self,request:Request<ImageStatusRequestV1>) -> Result<Response<ImageStatusResponseV1>, Status> {
