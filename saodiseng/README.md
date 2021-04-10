@@ -25,7 +25,12 @@ library/nginx       latest              519e12e2a84a9       137MB
 [root@localhost container]# crictl --image-endpoint unix:///var/run/saodiseng.sock  images docker:nginx:latest
 IMAGE               TAG                 IMAGE ID            SIZE
 library/nginx       latest              519e12e2a84a9       137MB
-[root@localhost container]# crictl --image-endpoint unix:///var/run/saodiseng.sock  images docker:/saodiseng/nginx:latest
+[root@localhost container]# crictl --image-endpoint unix:///var/run/saodiseng.sock  images harbor:/saodiseng/nginx:latest
 IMAGE               TAG                 IMAGE ID            SIZE
 /saodiseng/nginx    latest              6084105296a95       137MB
+
+[root@localhost container]# crictl --image-endpoint unix:///var/run/saodiseng.sock
+ images --digests sha256:6084105296a952523c36eea261af38885f41e9d1d0001b4916fa426e45377ffe
+IMAGE               TAG                 DIGEST              IMAGE ID            SIZE
+/saodiseng/nginx    latest              <none>              6084105296a95       137MB
 ```
