@@ -17,7 +17,15 @@ Image is up to date for 192.168.1.118:8899saodiseng/nginx@sha256:6084105296a9525
 
 ## 查看镜像列表
 ```
+[root@localhost container]# crictl --image-endpoint unix:///var/run/saodiseng.sock  images
+IMAGE               TAG                 IMAGE ID            SIZE
+/saodiseng/nginx    latest              6084105296a95       137MB
+library/nginx       latest              519e12e2a84a9       137MB
+
 [root@localhost container]# crictl --image-endpoint unix:///var/run/saodiseng.sock  images docker:nginx:latest
 IMAGE               TAG                 IMAGE ID            SIZE
-<none>              <none>                                  0B
+library/nginx       latest              519e12e2a84a9       137MB
+[root@localhost container]# crictl --image-endpoint unix:///var/run/saodiseng.sock  images docker:/saodiseng/nginx:latest
+IMAGE               TAG                 IMAGE ID            SIZE
+/saodiseng/nginx    latest              6084105296a95       137MB
 ```
