@@ -34,3 +34,9 @@ IMAGE               TAG                 IMAGE ID            SIZE
 IMAGE               TAG                 DIGEST              IMAGE ID            SIZE
 /saodiseng/nginx    latest              <none>              6084105296a95       137MB
 ```
+
+## 删除镜像
+```
+[root@localhost container]# crictl --image-endpoint unix:///var/run/saodiseng.sock  rmi 519e12e2a84a9
+Deleted: library/nginx:latest
+```

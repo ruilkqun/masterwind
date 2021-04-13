@@ -33,7 +33,7 @@ tonic = { path = "tonic" }
 sled = "0.34.6"
 
 # oci镜像库
-ant_king_image = "0.3.30"
+ant_king_image = "0.3.38"
 
 # grpc构建依赖
 [build-dependencies]
