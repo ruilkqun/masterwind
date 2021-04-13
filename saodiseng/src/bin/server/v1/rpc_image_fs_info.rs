@@ -10,5 +10,7 @@ pub fn image_fs_info(request:Request<ImageFsInfoRequest>) -> ImageFsInfoResponse
         let reply = ImageFsInfoResponse {
             image_filesystems:tmp_items,
         };
+
+        println!("reply:{:?}",reply);
         return reply;
 }
