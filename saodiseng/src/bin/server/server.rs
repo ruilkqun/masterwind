@@ -24,6 +24,8 @@ pub mod impl_remove_image_v1alpha2;
 pub mod impl_remove_image_v1;
 pub mod impl_image_status_v1alpha2;
 pub mod impl_image_status_v1;
+pub mod impl_image_fs_info_v1alpha2;
+pub mod impl_image_fs_info_v1;
 
 use futures::TryFutureExt;
 #[cfg(unix)]
@@ -272,7 +274,7 @@ impl ImageServiceV1alpha2 for MyK8sImageV1alpha2 {
     }
 
     async fn image_fs_info(&self,request:Request<ImageFsInfoRequestV1alpha2>) -> Result<Response<ImageFsInfoResponseV1alpha2>, Status> {
-        Ok(Response::new(image_fs_info_v1alpha2(request)))
+        Ok(Response::new(image_fs_info_v1alpha2(request).await))
     }
 }
 
@@ -389,7 +391,7 @@ impl ImageServiceV1 for MyK8sImageV1 {
     }
 
     async fn image_fs_info(&self,request:Request<ImageFsInfoRequestV1>) -> Result<Response<ImageFsInfoResponseV1>, Status> {
-        Ok(Response::new(image_fs_info_v1(request)))
+        Ok(Response::new(image_fs_info_v1(request).await))
     }
 }
 
