@@ -26,6 +26,7 @@ pub mod impl_image_status_v1alpha2;
 pub mod impl_image_status_v1;
 pub mod impl_image_fs_info_v1alpha2;
 pub mod impl_image_fs_info_v1;
+pub mod impl_run_pod_sandbox_v1alpha2;
 
 use futures::TryFutureExt;
 #[cfg(unix)]
